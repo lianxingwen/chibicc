@@ -1,0 +1,3 @@
+start: greeting name;
+greeting: "hello" | "hi";
+name: "world" | "there";
