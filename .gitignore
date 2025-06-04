@@ -8,3 +8,7 @@
 /chibicc
 /test/*.exe
 /stage2
+
+# Verilog simulation files
+single_cycle_processor/processor_sim
+single_cycle_processor/*.vcd
