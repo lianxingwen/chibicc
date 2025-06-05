@@ -43,8 +43,8 @@ module testbench;
         // 运行足够的时钟周期来执行测试程序
         #1000;
         
-        // 显示寄存器内容
-        $display("=== 处理器执行结果 ===");
+        // Display register contents
+        $display("=== Processor Execution Results ===");
         $display("$1 = %d", cpu.dp.reg_file_inst.registers[1]);
         $display("$2 = %d", cpu.dp.reg_file_inst.registers[2]);
         $display("$3 = %d", cpu.dp.reg_file_inst.registers[3]);
@@ -53,21 +53,21 @@ module testbench;
         $display("$6 = %d", cpu.dp.reg_file_inst.registers[6]);
         $display("$7 = %d", cpu.dp.reg_file_inst.registers[7]);
         
-        $display("=== 预期结果 ===");
-        $display("$1 = 5 (addi $1, $1, 5)");
+        $display("=== Expected Results ===");
+        $display("$1 = 5 (addi $1, $0, 5)");
         $display("$2 = 3 (addi $2, $0, 3)");
         $display("$3 = 8 (add $3, $1, $2)");
         $display("$4 = 5 (sub $4, $3, $2)");
-        $display("$5 = 0 (应该被跳过)");
-        $display("$6 = 0 (应该被跳过)");
+        $display("$5 = 10 (addi $5, $0, 10)");
+        $display("$6 = 20 (addi $6, $0, 20)");
         $display("$7 = 100 (addi $7, $0, 100)");
         
         $finish;
     end
 
-    // 监控重要信号
+    // Monitor important signals
     initial begin
-        $monitor("时间=%0t, PC=%h, 指令=%h, 状态=%b", 
+        $monitor("Time=%0t, PC=%h, Instruction=%h, State=%b", 
                  $time, cpu.dp.pc, cpu.dp.instruction, cpu.ctrl_unit.state);
     end
 

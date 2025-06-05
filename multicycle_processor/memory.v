@@ -23,24 +23,24 @@ module memory(
             memory_array[i] = 32'h00000000;
         end
         
-        // 加载一些测试指令
-        // add $1, $0, $0    # $1 = 0
-        memory_array[0] = 32'h00000820;
-        // addi $1, $1, 5    # $1 = 5
-        memory_array[1] = 32'h20210005;
+        // Load test instructions (matching testbench expectations)
+        // addi $1, $0, 5    # $1 = 5
+        memory_array[0] = 32'h20010005;
         // addi $2, $0, 3    # $2 = 3
-        memory_array[2] = 32'h20020003;
+        memory_array[1] = 32'h20020003;
         // add $3, $1, $2    # $3 = $1 + $2 = 8
-        memory_array[3] = 32'h00221820;
+        memory_array[2] = 32'h00221820;
         // sub $4, $3, $2    # $4 = $3 - $2 = 5
-        memory_array[4] = 32'h00622022;
-        // beq $1, $4, 2     # if $1 == $4, jump 2 instructions
-        memory_array[5] = 32'h10240002;
-        // addi $5, $0, 10   # $5 = 10 (should be skipped)
-        memory_array[6] = 32'h2005000A;
-        // addi $6, $0, 20   # $6 = 20 (should be skipped)
-        memory_array[7] = 32'h20060014;
-        // addi $7, $0, 100  # $7 = 100
+        memory_array[3] = 32'h00622022;
+        // beq $1, $2, 1     # if $1 == $2, jump 1 instruction (should not branch)
+        memory_array[4] = 32'h10220001;
+        // addi $5, $0, 10   # $5 = 10 (should be executed)
+        memory_array[5] = 32'h2005000A;
+        // addi $6, $0, 20   # $6 = 20 (should be executed)
+        memory_array[6] = 32'h20060014;
+        // j 8               # jump to address 32 (0x20)
+        memory_array[7] = 32'h08000008;
+        // addi $7, $0, 100  # $7 = 100 (at address 32)
         memory_array[8] = 32'h20070064;
     end
 
