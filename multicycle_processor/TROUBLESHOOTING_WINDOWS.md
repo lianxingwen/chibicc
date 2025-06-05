@@ -51,6 +51,42 @@ chcp 65001
 1. 以管理员身份运行命令提示符
 2. 右键点击"命令提示符" → "以管理员身份运行"
 
+### 错误4: GTKWave在脚本中无法启动
+
+**现象**: 在PowerShell中 `gtkwave multicycle_processor.vcd` 能正常工作，但在批处理脚本中点击"y"后无法打开
+
+**原因**: 批处理文件和PowerShell在处理命令时有差异
+
+**解决方案**:
+
+#### 方法1: 使用PowerShell脚本 (推荐)
+```powershell
+powershell -ExecutionPolicy Bypass -File run.ps1
+```
+
+#### 方法2: 使用简化的批处理脚本
+```cmd
+run_simple.bat
+```
+
+#### 方法3: 手动打开
+仿真完成后，手动运行：
+```cmd
+gtkwave multicycle_processor.vcd
+```
+
+#### 方法4: 调试GTKWave启动
+运行诊断脚本：
+```cmd
+debug_gtkwave.bat
+```
+
+#### 方法5: 修改执行策略
+如果PowerShell脚本无法运行：
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
 ## 验证安装
 
 ### 检查Icarus Verilog安装

@@ -51,7 +51,22 @@ if %errorlevel% equ 0 (
     set /p choice="Open waveform viewer? (y/n): "
     if /i "%choice%"=="y" (
         echo Opening GTKWave...
-        start gtkwave multicycle_processor.vcd
+        echo Trying method 1: Direct command
+        gtkwave multicycle_processor.vcd
+        if %errorlevel% neq 0 (
+            echo Method 1 failed, trying method 2: Using start command
+            start "" gtkwave multicycle_processor.vcd
+            if %errorlevel% neq 0 (
+                echo Method 2 failed, trying method 3: Full path
+                for /f "tokens=*" %%i in ('where gtkwave') do set GTKWAVE_PATH=%%i
+                echo GTKWave path: %GTKWAVE_PATH%
+                "%GTKWAVE_PATH%" multicycle_processor.vcd
+                if %errorlevel% neq 0 (
+                    echo All methods failed. Please run manually:
+                    echo gtkwave multicycle_processor.vcd
+                )
+            )
+        )
     )
 ) else (
     echo.
