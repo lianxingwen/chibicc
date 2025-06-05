@@ -6,6 +6,20 @@ module testbench;
     // 测试信号
     reg clk;
     reg reset;
+    
+    // 用于波形显示的wire信号
+    wire clk_wire = clk;
+    wire reset_wire = reset;
+    
+    // 处理器内部信号的wire连接（便于波形查看）
+    wire [31:0] pc_wire = cpu.dp.pc;
+    wire [31:0] instruction_wire = cpu.dp.instruction;
+    wire [3:0] state_wire = cpu.ctrl_unit.state;
+    wire [31:0] reg1_wire = cpu.dp.reg_file_inst.registers[1];
+    wire [31:0] reg2_wire = cpu.dp.reg_file_inst.registers[2];
+    wire [31:0] reg3_wire = cpu.dp.reg_file_inst.registers[3];
+    wire [31:0] reg4_wire = cpu.dp.reg_file_inst.registers[4];
+    wire [31:0] reg7_wire = cpu.dp.reg_file_inst.registers[7];
 
     // 实例化处理器
     multicycle_processor cpu(
@@ -60,7 +74,7 @@ module testbench;
     // 生成波形文件
     initial begin
         $dumpfile("multicycle_processor.vcd");
-        $dumpvars(0, testbench);
+        $dumpvars(0, testbench);  // 导出整个testbench层次结构
     end
 
 endmodule
