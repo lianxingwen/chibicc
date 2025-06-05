@@ -144,7 +144,23 @@ opcode  address
 
 ## 故障排除
 
-### 常见问题
+### Windows常见问题
+
+1. **'Icarus' 不是内部或外部命令**
+   - 解决方案: 安装Icarus Verilog并确保添加到PATH
+   - 详细指南: 查看 `TROUBLESHOOTING_WINDOWS.md`
+
+2. **中文乱码问题**
+   - 使用改进的 `run.bat` 脚本
+   - 或手动执行: `chcp 65001`
+
+3. **权限问题**
+   - 以管理员身份运行命令提示符
+
+### 快速检查
+运行 `check_install.bat` 检查系统配置
+
+### Linux常见问题
 
 1. **编译错误**: 检查Icarus Verilog是否正确安装
 2. **波形无法显示**: 确保GTKWave已安装
